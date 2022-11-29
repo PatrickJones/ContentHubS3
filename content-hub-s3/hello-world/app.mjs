@@ -103,9 +103,9 @@ async function upload(S3, key) {
 export async function lambdaHandler(event, context) {
     try {
         if (event.headers !== null && event.headers !== undefined) {
-            let headers = JSON.parse(event.headers);
+            let headers = event.headers;
 
-            if (typeof headers["x-ch-token"] === 'undefined' || headers["x-ch-token"] !== TOKEN) {
+            if (typeof headers['X-ch-token'] === 'undefined' || headers['X-ch-token'] !== TOKEN) {
                 console.warn("x-ch-token is required.");
                 return response = {
                     'statusCode': 401,
